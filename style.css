@@ -161,3 +161,26 @@ button img { height: 100%; }
 }
 .chat-history p { margin: 0.5ex; }
 
+
+.door-knocking {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  animation: knock 0.5s infinite alternate;
+}
+
+@keyframes knock {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+
+.glowing-text {
+  text-shadow: 0 0 10px white;
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 10px white; }
+  100% { text-shadow: 0 0 20px white; }
+}
