@@ -1,6 +1,7 @@
 {
     "name": "Potato Peace by Ronynn",
     "short_name": "Potato Peace",
+      "description": "Bringing peace to the world one potato at a time.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
