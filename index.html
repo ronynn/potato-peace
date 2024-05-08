@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="style.css" />
         <script src="ink.js"></script>
         <script src="story.js"></script>
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="/potato-peace/manifest.json" />
     </head>
     <body>
         <div class="app" aria-live="polite">
@@ -89,7 +89,7 @@
             if ("serviceWorker" in navigator) {
                 window.addEventListener("load", () => {
                     navigator.serviceWorker &&
-                        navigator.serviceWorker.register("./sw.js");
+                        navigator.serviceWorker.register("/potato-peace/sw.js");
                 });
             }
         </script>

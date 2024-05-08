@@ -16,6 +16,6 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone",
-    "start_url": "./?utm_source=pwa_install",
-    "scope": "."
+    "scope": "/potato-peace/",
+    "start_url": "/potato-peace/"
 }
