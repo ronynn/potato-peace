@@ -1,100 +1,73 @@
-const cacheName = "cache1"; // Change value to force update
+var GHPATH = '/potato-peace';
+var APP_PREFIX = 'peace_';
+var VERSION = 'version_0.08';
+var URLS = [    
+  `${GHPATH}/`,
+  `${GHPATH}/index.html`,
+ `${GHPATH}/index.html`,
+`${GHPATH}/mainfest.json`,
+`${GHPATH}/script.js`,
+`${GHPATH}/vn-runner.js`,
+`${GHPATH}/ink.js`,
+`${GHPATH}/story.js`,
+`${GHPATH}/style.css`,
+`${GHPATH}/img/about.png`,
+`${GHPATH}/img/ceremony.png`,
+`${GHPATH}/img/cover.png`,
+`${GHPATH}/img/father.png`,
+`${GHPATH}/img/mayor.png`,
+`${GHPATH}/img/mc.png`,
+`${GHPATH}/img/mc2.png`,
+`${GHPATH}/img/mc3.png`,
+`${GHPATH}/img/museum.png`,
+`${GHPATH}/img/office.png`,
+`${GHPATH}/img/restart.png`,
+`${GHPATH}/img/save.png`,
+`${GHPATH}/img/sculptor.png`,
+`${GHPATH}/img/statue.png`,
+`${GHPATH}/img/theme.png`,
+`${GHPATH}/img/town.png`,
+`${GHPATH}/img/woods.png`,
+]
 
-self.addEventListener("install", event => {
-    // Kick out the old service worker
-    self.skipWaiting();
+var CACHE_NAME = APP_PREFIX + VERSION
+self.addEventListener('fetch', function (e) {
+  console.log('Fetch request : ' + e.request.url);
+  e.respondWith(
+    caches.match(e.request).then(function (request) {
+      if (request) { 
+        console.log('Responding with cache : ' + e.request.url);
+        return request
+      } else {       
+        console.log('File is not cached, fetching : ' + e.request.url);
+        return fetch(e.request)
+      }
+    })
+  )
+})
 
-    event.waitUntil(
-        caches.open(cacheName).then(cache => {
-            return cache.addAll([
-                "/",
-                "android-chrome-36x36.png", // Favicon, Android Chrome M39+ with 0.75 screen density
-                "android-chrome-48x48.png", // Favicon, Android Chrome M39+ with 1.0 screen density
-                "android-chrome-72x72.png", // Favicon, Android Chrome M39+ with 1.5 screen density
-                "android-chrome-96x96.png", // Favicon, Android Chrome M39+ with 2.0 screen density
-                "android-chrome-144x144.png", // Favicon, Android Chrome M39+ with 3.0 screen density
-                "android-chrome-192x192.png", // Favicon, Android Chrome M39+ with 4.0 screen density
-                "android-chrome-256x256.png", // Favicon, Android Chrome M47+ Splash screen with 1.5 screen density
-                "android-chrome-384x384.png", // Favicon, Android Chrome M47+ Splash screen with 3.0 screen density
-                "android-chrome-512x512.png", // Favicon, Android Chrome M47+ Splash screen with 4.0 screen density
-                "apple-touch-icon.png", // Favicon, Apple default
-                "apple-touch-icon-57x57.png", // Apple iPhone, Non-retina with iOS6 or prior
-                "apple-touch-icon-60x60.png", // Apple iPhone, Non-retina with iOS7
-                "apple-touch-icon-72x72.png", // Apple iPad, Non-retina with iOS6 or prior
-                "apple-touch-icon-76x76.png", // Apple iPad, Non-retina with iOS7
-                "apple-touch-icon-114x114.png", // Apple iPhone, Retina with iOS6 or prior
-                "apple-touch-icon-120x120.png", // Apple iPhone, Retina with iOS7
-                "apple-touch-icon-144x144.png", // Apple iPad, Retina with iOS6 or prior
-                "apple-touch-icon-152x152.png", // Apple iPad, Retina with iOS7
-                "apple-touch-icon-180x180.png", // Apple iPhone 6 Plus with iOS8
-                "browserconfig.xml", // IE11 icon configuration file
-                "favicon.ico", // Favicon, IE and fallback for other browsers
-                "favicon-16x16.png", // Favicon, default
-                "favicon-32x32.png", // Favicon, Safari on Mac OS
-                "index.html", // Main HTML file
-                "mainfest.json",
-                "logo.png", // Logo
-                "main.js", // Main Javascript file
-                //	"manifest.json", // Manifest file
-                "site.webmanifest",
-                "script.js", //script I edited
-                "vn-runner.js",
-                "ink.js",
-                "story.js",
-                "style.css",
-                "/img/about.png",
-                "/img/ceremony.png",
-                "/img/cover.png",
-                "/img/father.png",
-                "/img/mayor.png",
-                "/img/mc.png",
-                "/img/mc2.png",
-                "/img/mc3.png",
-                "/img/museum.png",
-                "/img/office.png",
-                "/img/restart.png",
-                "/img/save.png",
-                "/img/sculptor.png",
-                "/img/statue.png",
-                "/img/theme.png",
-                "/img/town.png",
-                "/img/woods.png",
-            ]);
-        })
-    );
-});
+self.addEventListener('install', function (e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      console.log('Installing cache : ' + CACHE_NAME);
+      return cache.addAll(URLS)
+    })
+  )
+})
 
-self.addEventListener("activate", event => {
-    // Delete any non-current cache
-    event.waitUntil(
-        caches.keys().then(keys => {
-            Promise.all(
-                keys.map(key => {
-                    if (![cacheName].includes(key)) {
-                        return caches.delete(key);
-                    }
-                })
-            );
-        })
-    );
-});
-
-// Offline-first, cache-first strategy
-// Kick off two asynchronous requests, one to the cache and one to the network
-// If there's a cached version available, use it, but fetch an update for next time.
-// Gets data on screen as quickly as possible, then updates once the network has returned the latest data.
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.open(cacheName).then(cache => {
-            return cache.match(event.request).then(response => {
-                return (
-                    response ||
-                    fetch(event.request).then(networkResponse => {
-                        cache.put(event.request, networkResponse.clone());
-                        return networkResponse;
-                    })
-                );
-            });
-        })
-    );
-});
+self.addEventListener('activate', function (e) {
+  e.waitUntil(
+    caches.keys().then(function (keyList) {
+      var cacheWhitelist = keyList.filter(function (key) {
+        return key.indexOf(APP_PREFIX)
+      })
+      cacheWhitelist.push(CACHE_NAME);
+      return Promise.all(keyList.map(function (key, i) {
+        if (cacheWhitelist.indexOf(key) === -1) {
+          console.log('Deleting cache : ' + keyList[i] );
+          return caches.delete(keyList[i])
+        }
+      }))
+    })
+  )
+})

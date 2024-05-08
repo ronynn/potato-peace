@@ -86,12 +86,12 @@
             </div>
         </div>
         <script>
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", () => {
-                    navigator.serviceWorker &&
-                        navigator.serviceWorker.register("/potato-peace/sw.js");
-                });
-            }
+            if (navigator.serviceWorker) {
+        navigator.serviceWorker.register (
+          '/potato-peace/sw.js',
+          {scope: '/potato-peace/'}
+        )
+      }
         </script>
         <script src="vn-runner.js"></script>
     </body>
