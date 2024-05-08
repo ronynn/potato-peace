@@ -1,62 +1,98 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Potato-Peace</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8" />
+        <title>Potato-Peace</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta property="og:title" content="Potato Peace - The Game"/>
-<meta property="og:image" content="/img/cover.png"/>
-<meta property="og:description" content="A visual novel set in a world where humans and sentient potatoes live in harmony."/>
-<meta property="og:url" content="https://ronynn.github.io/potato-peace"/>
-<meta property="og:image:width" content="679" />
-<meta property="og:image:height" content="483"/>
-<meta property="og:type" content="website"/>
+        <meta property="og:title" content="Potato Peace - The Game" />
+        <meta property="og:image" content="/img/cover.png" />
+        <meta
+            property="og:description"
+            content="A visual novel set in a world where humans and sentient potatoes live in harmony."
+        />
+        <meta
+            property="og:url"
+            content="https://ronynn.github.io/potato-peace"
+        />
+        <meta property="og:image:width" content="679" />
+        <meta property="og:image:height" content="483" />
+        <meta property="og:type" content="website" />
 
+        <link rel="stylesheet" href="style.css" />
+        <script src="ink.js"></script>
+        <script src="story.js"></script>
+        <link rel="manifest" href="manifest.json" />
+    </head>
+    <body>
+        <div class="app" aria-live="polite">
+            <div class="camera"><div></div></div>
+            <div class="chat-box">
+                <div class="chat" aria-live="polite"></div>
+            </div>
+            <div class="buttons">
+                <button id="save" aria-label="save/load">
+                    <img src="img/save.png" />
+                </button>
+                <button id="theme" aria-label="theme">
+                    <img src="img/theme.png" />
+                </button>
+                <button id="history" aria-label="chat history">
+                    <img src="img/about.png" />
+                </button>
+                <button id="restart" aria-label="restart">
+                    <img src="img/restart.png" />
+                </button>
+            </div>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="ink.js"></script>
-    <script src="story.js"></script>
-</head>
-<body>
-	<div class="app" aria-live="polite">
-		<div class="camera"><div></div></div>
-		<div class="chat-box"><div class="chat" aria-live="polite"></div></div>
-		<div class="buttons">
-			<button id="save" aria-label="save/load"><img src="img/save.png"></button>
-			<button id="theme" aria-label="theme"><img src="img/theme.png"></button>
-			<button id="history" aria-label="chat history"><img src="img/about.png"></button>
-			<button id="restart" aria-label="restart"><img src="img/restart.png"></button>
-		</div>
-
-		<div id="save-menu" class="menu alert">
-			<button class="close">Close</button>
-			<h1>browser_storage</h1>
-			<p>(Gets deleted when browser cookies are cleared.)</p>
-			<p class="indented">
-				<button id="save-browser">Save</button>
-				<button id="load-browser">Load</button>
-			</p>
-			<h1>file_based_storage</h1>
-       <p>(Save a .json file to load from save_state later. Unnecessary for this game.)</p>
-			<p class="indented">
-				<button id="save-file" aria-label="download file">Save</button> or
-				<input id="load-file" aria-label="upload file" type="file" accept=".json">
-			</p>
-		</div>
-		<div id="old-chat" class="menu">
-			<div class="chat-history"></div>
-			<button class="close">Close</button>
-		</div>
-		<div id="confirm-restart" class="menu dialog"><div class="chat-box center">
-			<p>Restart game?</p>
-			<p>
-				<button id="yes-restart">Yes</button>
-				<button id="no-restart">No</button>
-			</p>
-		</div></div>
-	</div>
-
-    <script src="vn-runner.js"></script>
-</body>
+            <div id="save-menu" class="menu alert">
+                <button class="close">Close</button>
+                <h1>browser_storage</h1>
+                <p>(Gets deleted when browser cookies are cleared.)</p>
+                <p class="indented">
+                    <button id="save-browser">Save</button>
+                    <button id="load-browser">Load</button>
+                </p>
+                <h1>file_based_storage</h1>
+                <p>
+                    (Save a .json file to load from save_state later.
+                    Unnecessary for this game.)
+                </p>
+                <p class="indented">
+                    <button id="save-file" aria-label="download file">
+                        Save
+                    </button>
+                    or
+                    <input
+                        id="load-file"
+                        aria-label="upload file"
+                        type="file"
+                        accept=".json"
+                    />
+                </p>
+            </div>
+            <div id="old-chat" class="menu">
+                <div class="chat-history"></div>
+                <button class="close">Close</button>
+            </div>
+            <div id="confirm-restart" class="menu dialog">
+                <div class="chat-box center">
+                    <p>Restart game?</p>
+                    <p>
+                        <button id="yes-restart">Yes</button>
+                        <button id="no-restart">No</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker &&
+                        navigator.serviceWorker.register("./sw.js");
+                });
+            }
+        </script>
+        <script src="vn-runner.js"></script>
+    </body>
 </html>
