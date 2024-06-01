@@ -1,6 +1,6 @@
 :root {
 	--sz: 3vh;
-	--screen-bg: linear-gradient(to bottom right, floralwhite, goldenrod);
+	--screen-bg: linear-gradient(to top right, floralwhite, goldenrod);
 	--app-bg: #khaki;
 	--text: darkgoldenrod;
 	--text-bg: oldlace;
@@ -31,7 +31,7 @@ body {
 	padding: 5vh;
   font-family: monospace;
 	background: var(--screen-bg);
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 div { margin: 0; padding: 0 }

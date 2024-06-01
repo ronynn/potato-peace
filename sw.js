@@ -4,7 +4,6 @@ var VERSION = "version_0.08";
 var URLS = [
     `${GHPATH}/`,
     `${GHPATH}/index.html`,
-    `${GHPATH}/index.html`,
     `${GHPATH}/manifest.webmanifest`,
     `${GHPATH}/script.js`,
     `${GHPATH}/vn-runner.js`,
