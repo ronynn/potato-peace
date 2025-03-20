@@ -17,7 +17,7 @@
 }
 .camera > div {
 	background-image: url("img/ceremony.png");
-	aspect-ratio: 8/7;
+	aspect-ratio:9/7;
 }
 
 
@@ -28,10 +28,10 @@ html {
 }
 body {
 	margin: 0;
-	padding: 5vh;
-  font-family: monospace;
+	padding: 1vh;
+  font-family: Roboto;
 	background: var(--screen-bg);
-	font-size: 1.2em;
+	font-size: 1.5em;
 }
 
 div { margin: 0; padding: 0 }
@@ -54,7 +54,7 @@ div { margin: 0; padding: 0 }
 .alert .camera { display: none; }
 .camera {
 	box-sizing: border-box;
-	padding: 1em 1em 0 1em;
+	padding: 0.1em 0.1em 0.1em 0.1em;
 	width: 100%;
 	flex: 0;
 }
@@ -74,12 +74,12 @@ div { margin: 0; padding: 0 }
 
 .chat-box {
 	flex: 1;
-	min-height: 20%;
+	min-height: 10%;
 	background: var(--text-bg);
 	color: var(--text);
-	margin: 1ex 1em;
+	margin: 0.1ex 0.1em;
 	border-radius: 0.3em;
-	padding: 0.5em 0.5em;
+	padding: 0.1em 0.1em;
 }
 .menu .chat-box { border: var(--chat-box-border); }
 .alert .chat-box { flex: 0; text-align: center; }
@@ -90,7 +90,7 @@ a {
 color: var(--link);
 text-decoration: none;
  }
-.indented { padding-left: 3em; }
+.indented { padding-left: 1em; }
 .center { text-align: center; }
 button, input[type="file"] {
 	font-family: inherit;
@@ -184,3 +184,24 @@ button img { height: 100%; }
   0% { text-shadow: 0 0 10px white; }
   100% { text-shadow: 0 0 20px white; }
 }
+
+
+
+/*
+
+@media screen and (max-width: 700px) {
+  
+  .app {
+    margin: 0 1em;
+  }
+  .camera img {
+    padding: 0.5em;
+  }
+  
+  .chat-box {
+    margin: 0.5ex 0.5em;
+    padding: 0.25em;
+  }
+}
+
+*/
